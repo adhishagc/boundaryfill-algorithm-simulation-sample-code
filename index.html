@@ -1,39 +1,67 @@
-<html>
-	<head>
-		<style type="text/css">
-			.tmain{
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boundary Fill Algorithm Visualizer | interactive Computer Graphics Simulation</title>
+    <meta name="description" content="An interactive visualization of the Boundary Fill algorithm used in computer graphics for polygon filling. Explore 4-connected seed fill logic.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Boundary Fill Visualizer</h1>
+            <p class="subtitle">Interactive simulation of seed-fill algorithms in computer graphics</p>
+        </header>
 
-			}
-			.tcol{
-				width: 20px;
-				height: 20px;
-			}
-		</style>
+        <section class="controls">
+            <div class="input-group">
+                <label for="rows">Grid Rows</label>
+                <input id="rows" type="number" value="15" min="5" max="50">
+            </div>
+            <div class="input-group">
+                <label for="cols">Grid Columns</label>
+                <input id="cols" type="number" value="15" min="5" max="50">
+            </div>
+            <div class="button-group">
+                <button id="submit" onclick="generateGrid()">Generate Grid</button>
+                <button id="reset" onclick="resetAll()">Clear All</button>
+            </div>
+        </section>
 
-	</head>
+        <div class="status-bar">
+            Start Pixel Selected: <span id="status">No</span>
+        </div>
 
-	<body>
-		
-			<h3>Enter the Grid Details</h3>
-			<label> Number of Rows </label>
-			<input id="rows" type="text" name="rows">
+        <div class="button-group" style="margin-bottom: 2rem;">
+            <button id="select" onclick="togglePicker()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M2 12h20"/></svg>
+                Pick Seed Point
+            </button>
+            <button id="fill" onclick="startFill()">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m21 11-9-9-9 9"/><path d="M21 13H3"/><path d="M12 22V13"/></svg>
+                Run Algorithm
+            </button>
+        </div>
 
-			<label> Number of Coloums </label>
-			<input id="cols" type="text" name="cols">
+        <div class="grid-container">
+            <table id="grid"></table>
+        </div>
 
-			<input id="reset" type="reset" value="Clear">
-			<button id="submit" onclick="getData();" > Submit </button>
+        <footer class="instructions">
+            <h4>How to use the visualizer:</h4>
+            <ol>
+                <li>Enter the grid dimensions and click <strong>Generate Grid</strong>.</li>
+                <li><strong>Click and drag</strong> on the grid to draw boundaries (dark cells).</li>
+                <li>Click <strong>Pick Seed Point</strong> and select an area inside your boundary.</li>
+                <li>Click <strong>Run Algorithm</strong> to watch the boundary fill process.</li>
+            </ol>
+        </footer>
+    </div>
 
-			<table id="grid" border='1'>
-
-			</table>
-			
-			<h4>Select Start Pixel Status : <span id="status">No</span> </h4>
-			<button id="select" onclick="enablePicker()"> Click </button>
-
-			<button id="fill" onclick="startFill()"> Start Filling </button>
-			
-		<script src="boundaryfill.js"></script>
-
-	</body>
+    <script src="algorithm.js"></script>
+</body>
 </html>
